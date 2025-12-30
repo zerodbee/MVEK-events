@@ -1,0 +1,32 @@
+@font-face {
+  font-family: 'Caviar Dreams';
+  src: url('/assets/Caviar_Dreams.ttf') format('truetype');
+  font-display: swap;
+  
+}
+
+*,
+*::before,
+*::after {
+  font-size: 13px;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Caviar Dreams', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  color: var(--text-gray);
+  background-color: #ffffff;
+  line-height: 1.5;
+}
+
+header, main, div {
+  margin: 0;
+}

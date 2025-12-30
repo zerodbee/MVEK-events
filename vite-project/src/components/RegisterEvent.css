@@ -1,0 +1,106 @@
+
+.register-btn-wrapper {
+  margin-top: 1.2rem;
+
+}
+
+.register-btn {
+  background: white;
+  color: #1e2589;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 12px;
+  padding: 0.75rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+width: 300px;
+  max-width: calc(100% - 2rem); 
+  min-width: 220px;
+}
+@media (max-width: 768px) {
+  .register-btn {
+    width: 100%;
+    max-width: 100%;
+    min-width: auto;
+    padding: 0.8rem 1.2rem;
+    font-size: 0.95rem;
+  }
+}
+.register-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #1e2589, #3b42c4);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s;
+  border-radius: 12px;
+}
+
+.register-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: rgba(100, 116, 139, 0.4);
+}
+
+.register-btn:hover:not(:disabled)::before {
+  opacity: 1;
+}
+
+.register-btn:hover:not(:disabled) {
+  color: white;
+}
+
+.register-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.register-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.85;
+  transform: none;
+}
+
+
+.register-btn-success {
+  border-color: #009238  !important;
+  color: #009238 !important;
+}
+
+.register-btn-success::before {
+  display: none;
+}
+
+
+.register-btn-loader {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #cbd5e1;
+  border-top: 2px solid #1e2589;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+
+.register-error {
+  color: #e53e3e;
+  font-size: 0.9rem;
+  margin-top: 0.75rem;
+  font-weight: 500;
+}
+
+
+.register-btn-placeholder {
+  height: 44px;
+}

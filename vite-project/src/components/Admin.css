@@ -1,0 +1,226 @@
+
+.admin-container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 2.5rem 1.8rem;
+  min-height: 100vh;
+}
+
+
+.admin-title {
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: #0f172a;
+  text-align: center;
+  margin: 0 0 2rem 0;
+  letter-spacing: -0.5px;
+  position: relative;
+}
+
+.admin-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(to right, #1e2589, #3b42c4);
+  margin: 0.75rem auto 0;
+  border-radius: 2px;
+}
+
+
+.admin-profile-card {
+  max-width: 1000px;
+  margin: 0 auto 1.8rem;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(226, 232, 240, 0.7);
+  transition: all 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-profile-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, #1e2589, #3b42c4);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.4s ease;
+}
+
+.admin-profile-card:hover::before,
+.admin-profile-card:focus::before {
+  transform: scaleY(1);
+}
+
+.admin-profile-card:hover {
+  transform: translateY(-4px);
+}
+
+.admin-profile-card:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(30, 37, 137, 0.25);
+}
+
+
+.admin-profile-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  line-height: 1.7;
+  font-size: 1.1rem;
+  color: #334155;
+}
+
+.admin-profile-list li {
+  padding: 0.5rem 0;
+}
+
+.admin-profile-list li strong {
+  font-weight: 600;
+  color: #0f172a;
+  min-width: 50px;
+  display: inline-block;
+}
+
+
+.admin-actions {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+
+
+.admin-actions button {
+  width: 100%;
+  padding: 0.9rem 1.4rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: -0.3px;
+}
+
+
+.admin-actions button:nth-child(1) {
+  background: linear-gradient(to right, #1e2589, #3b42c4);
+  color: white;
+  box-shadow: 0 4px 12px rgba(30, 37, 137, 0.25);
+}
+
+.admin-actions button:nth-child(1):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(30, 37, 137, 0.35);
+}
+
+.admin-actions button:nth-child(1):active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(30, 37, 137, 0.3);
+}
+
+
+.admin-actions button:nth-child(2) {
+  background: rgba(241, 245, 249, 0.9);
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+}
+
+.admin-actions button:nth-child(2):hover {
+  background: rgba(241, 245, 249, 1);
+  color: #475569;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+}
+
+.admin-actions button:nth-child(2):active {
+  transform: translateY(0);
+}
+
+
+.admin-loading {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #64748b;
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .admin-container {
+    padding: 1.8rem 1.2rem;
+  }
+
+  .admin-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .admin-title::after {
+    width: 50px;
+  }
+
+  .admin-profile-card {
+    padding: 1.6rem;
+  }
+
+  .admin-profile-list {
+    font-size: 1rem;
+  }
+
+  .admin-actions button {
+    padding: 0.85rem 1.2rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .admin-title {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .admin-profile-card {
+    padding: 1.4rem;
+  }
+
+  .admin-profile-list {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .admin-actions button {
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-profile-card,
+  .admin-actions button {
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .admin-profile-card::before {
+    transition: none !important;
+  }
+}
