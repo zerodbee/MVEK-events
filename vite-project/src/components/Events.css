@@ -197,7 +197,27 @@
   }
 
 
-
+<<<<<<< HEAD
+=======
+  .event-image-item {
+    height: 100%;
+    max-height: 150px;
+    background-color: #f1f5f9;
+    width: 100%;
+    height: auto;
+    background-color: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .event-image-item img {
+    max-height: 80px;
+    height: 100%;
+    object-fit: contain;
+    background-color: #f1f5f9;
+  }
+>>>>>>> d49267c7033f71fe98c255ad3a4b66a4aaeaaa97
 }
 
 .event-images--count-3 {
