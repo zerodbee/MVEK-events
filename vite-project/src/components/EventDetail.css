@@ -75,14 +75,13 @@
 .event-detail-image {
   width: 100%;
   aspect-ratio: 4 / 3;
-  object-fit: contain; /* Changed from cover to contain to prevent cropping */
+  object-fit: contain;
   border-radius: 8px;
   background-color: #f0f3f7;
   max-width: 100%;
   height: auto;
   display: block;
   margin: 0 auto;
-  background-color: #f0f3f7;
   overflow: hidden;
 }
 
@@ -100,7 +99,7 @@
     width: 100%;
     height: auto;
     max-width: 100%;
-    object-fit: cover;
+    object-fit: contain;
     background-color: #f0f3f7;
   }
 }
@@ -142,7 +141,7 @@
 
   .event-detail-image {
     aspect-ratio: 16 / 9;
-    object-fit: cover;
+    object-fit: contain;
   }
 
   .event-detail-meta {
@@ -177,7 +176,7 @@
   .event-detail-image {
     aspect-ratio: 1 / 1;
     background-color: #f0f3f7;
-    object-fit: cover;
+    object-fit: contain;
   }
 
   .event-detail-meta {
