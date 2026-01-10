@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import Layout from '../Layout';
-import LogoutButton from './LogoutButton.jsx'; 
+import LogoutButton from './LogoutButton.jsx';
 import AddEvent from "./AddEvent.jsx";
 import './Admin.css';
 
@@ -12,7 +12,7 @@ function Admin() {
   const [payload, setPayload] = useState(null);
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -34,7 +34,7 @@ function Admin() {
       setPayload(JSON.parse(json));
     } catch (e) {
       console.error("Ошибка декодирования токена:", e);
-      navigate("/authorization", { replace: true }); 
+      navigate("/authorization", { replace: true });
     }
   }, [navigate]);
 
@@ -57,6 +57,17 @@ function Admin() {
 
     fetchEvents();
   }, [payload]);
+
+  // Helper function to check if event date is today or in the past
+  const isEventTodayOrPast = (eventDate) => {
+    if (!eventDate) return false;
+    const eventDateObj = new Date(eventDate);
+    const today = new Date();
+    // Set time to 00:00:00 for accurate date comparison
+    eventDateObj.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
+    return eventDateObj <= today;
+  };
 
   const handleDeleteEvent = async (eventId) => {
     if (!window.confirm("Вы уверены, что хотите удалить это мероприятие?")) {
@@ -154,13 +165,16 @@ function Admin() {
                       >
                         Удалить
                       </button>
-                      {!event.passed && (
+                      {!event.passed && isEventTodayOrPast(event.date) && (
                         <button
                           className="pass-btn"
                           onClick={() => handleMarkAsPassed(event._id)}
                         >
                           Отметить как прошедшее
                         </button>
+                      )}
+                      {!event.passed && !isEventTodayOrPast(event.date) && (
+                        <span className="disabled-btn">Отметить как прошедшее (доступно после дня мероприятия)</span>
                       )}
                     </div>
                   </div>
