@@ -82,7 +82,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.get("/getevents", async (req, res) => {
   try {
-    const events = await Event.find().select('title description imageUrls');
+    const events = await Event.find().select('title description imageUrls date location').sort({ date: -1 });
     res.json(events);
   } catch (error) {
     console.error("GET /getevents error:", error);
