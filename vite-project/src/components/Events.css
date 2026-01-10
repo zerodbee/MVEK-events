@@ -173,8 +173,39 @@
   .event-images {
     flex-direction: column;
   }
-  
+  .events-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .events-title {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+  }
+
+  .event-card {
+    padding: 1.3rem;
+    margin-bottom: 1.3rem;
+  }
+
+  .event-title {
+    font-size: 1.25rem;
+  }
+
+  .event-description {
+    font-size: 0.95rem;
+    -webkit-line-clamp: 2;
+  }
+
+  .event-images--count-2 .event-image-item,
+  .event-images--count-3 .event-image-item {
+    height: 100%;
+    max-height: 100px;
+  }
+
   .event-image-item {
+    height: 100%;
+    max-height: 56px;
+    background-color: #f1f5f9;
     width: 100%;
     height: auto;
     background-color: #f1f5f9;
@@ -184,7 +215,8 @@
   }
   
   .event-image-item img {
-    height: 200px;
+    max-height: 80px;
+    height: 100%;
     object-fit: contain;
     background-color: #f1f5f9;
   }
