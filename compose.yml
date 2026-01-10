@@ -35,6 +35,8 @@ services:
     restart: always
     ports:
       - "3000:80"
+    environment:
+      - VITE_BACKEND_URL=${BACKEND_URL}
     depends_on:
       - backend
     networks:

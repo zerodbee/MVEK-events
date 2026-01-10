@@ -2,13 +2,16 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Events.css";
 
+// Define backend URL as a constant
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
+
 function Events() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5000/getevents")
+    fetch(`${BACKEND_URL}/getevents`)
       .then(res => {
         if (!res.ok) throw new Error("Network response was not ok");
         return res.json();
@@ -67,7 +70,7 @@ function Events() {
                 {event.imageUrls.slice(0, 3).map((url, i) => (
                   <div key={i} className="event-image-item">
                     <img
-                      src={`http://localhost:5000${url}`}
+                      src={`${BACKEND_URL}${url}`}
                       alt={`Изображение ${i + 1}`}
                     />
                   </div>

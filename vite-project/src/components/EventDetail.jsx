@@ -4,6 +4,9 @@ import Layout from "../Layout";
 import './EventDetail.css';
 import RegisterEvent from "./RegisterEvent";
 
+// Define backend URL as a constant
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
+
 export default function EventDetail() {
   const { id } = useParams();
   const [event, setEvent] = useState(null);
@@ -14,7 +17,7 @@ export default function EventDetail() {
     if (!id) return;
 
     setLoading(true);
-    fetch(`http://localhost:5000/getevent/${id}`)
+    fetch(`${BACKEND_URL}/getevent/${id}`)
       .then(res => {
         if (!res.ok) throw new Error("Мероприятие не найдено");
         return res.json();
@@ -59,7 +62,7 @@ export default function EventDetail() {
           {event.imageUrls.map((url, i) => (
             <img
               key={i}
-              src={`http://localhost:5000${url}`}
+              src={`${BACKEND_URL}${url}`}
               alt={`Изображение ${i + 1}`}
               className="event-detail-image"
             />

@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './AddEvent.css';
 
+// Define backend URL as a constant
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
+
 function AddEvent() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -73,7 +76,7 @@ function AddEvent() {
     imageFiles.forEach(file => formData.append("images", file));
 
     try {
-      const res = await fetch("http://localhost:5000/addevents", {
+      const res = await fetch(`${BACKEND_URL}/addevents`, {
         method: "POST",
         body: formData,
       });

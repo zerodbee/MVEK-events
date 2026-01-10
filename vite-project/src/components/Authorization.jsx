@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import Layout from '../Layout';
 import './Registration.css'
 
+// Define backend URL as a constant
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
+
 function Authorization() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
@@ -14,7 +17,7 @@ function Authorization() {
     setError("");
 
     try {
-      const res = await fetch("http://localhost:5000/login", {
+      const res = await fetch(`${BACKEND_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ login, password }),

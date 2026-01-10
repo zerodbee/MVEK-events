@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './UserEvents.css';
 
+// Define backend URL as a constant
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
+
 const getUserIdFromToken = (token) => {
   if (!token) return null;
   try {
@@ -49,7 +52,7 @@ export default function UserEvents() {
       try {
         setLoading(true);
         setError(null);
-        const userRes = await fetch(`http://localhost:5000/user/${userId}`, {
+        const userRes = await fetch(`${BACKEND_URL}/user/${userId}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -65,7 +68,7 @@ export default function UserEvents() {
           return;
         }
 
-        const eventsRes = await fetch("http://localhost:5000/geteventsbyids", {
+        const eventsRes = await fetch(`${BACKEND_URL}/geteventsbyids`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -105,7 +108,7 @@ export default function UserEvents() {
     setUnregistering(prev => new Set(prev).add(eventId));
 
     try {
-      const response = await fetch("http://localhost:5000/unregisterevent", {
+      const response = await fetch(`${BACKEND_URL}/unregisterevent`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -169,7 +172,7 @@ export default function UserEvents() {
               {event.imageUrls?.[0] && (
                 <div className="event-image">
                   <img
-                    src={`http://localhost:5000${event.imageUrls[0]}`}
+                    src={`${BACKEND_URL}${event.imageUrls[0]}`}
                     alt={event.title}
                     onError={(e) => e.target.style.display = 'none'}
                   />

@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import './RegisterEvent.css';
 
+// Define backend URL as a constant
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
+
 function RegisterEvent({ eventId }) {
   const [loading, setLoading] = useState(false);
   const [registered, setRegistered] = useState(false);
@@ -16,7 +19,7 @@ function RegisterEvent({ eventId }) {
         const userId = getUserIdFromToken(token);
         if (!userId) return;
 
-        const res = await fetch(`http://localhost:5000/user/${userId}`);
+        const res = await fetch(`${BACKEND_URL}/user/${userId}`);
         if (!res.ok) return;
 
         const { eventId: userEventIds = [] } = await res.json();
@@ -66,7 +69,7 @@ function RegisterEvent({ eventId }) {
         throw new Error("Некорректный ID мероприятия");
       }
 
-      const response = await fetch("http://localhost:5000/registerevent", {
+      const response = await fetch(`${BACKEND_URL}/registerevent`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

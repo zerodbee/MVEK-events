@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import Layout from '../Layout';
 import './Registration.css';
 
+// Define backend URL as a constant
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
+
 function Registration() {
   const [login, setLogin] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -58,7 +61,7 @@ function Registration() {
     };
 
     try {
-      const res = await fetch("http://localhost:5000/reg", {
+      const res = await fetch(`${BACKEND_URL}/reg`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
