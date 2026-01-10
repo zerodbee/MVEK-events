@@ -41,7 +41,7 @@ function Header() {
     <header className="header-glass">
       <div className="header-content">
         <Link to="/" className="header-logo">
-          📌 Афиша<span className="logo-accent">МВЕК</span>
+          Афиша<span className="logo-accent">МВЕК</span>
         </Link>
 
         <nav className="header-nav">
