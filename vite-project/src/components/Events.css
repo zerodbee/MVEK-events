@@ -88,7 +88,7 @@
   text-overflow: ellipsis;
 }
 
-
+/* --- Изображения --- */
 .event-images {
   display: flex;
   flex-wrap: wrap;
@@ -105,8 +105,7 @@
   overflow: hidden;
   background: #f1f5f9;
   position: relative;
-  transition: transform 0.25s ease, border-radius 0.25s ease;
-  background-color: #f1f5f9;
+  transition: transform 0.25s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -128,94 +127,31 @@
 .event-image-item img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover; /* лучше cover для заполнения */
   display: block;
   transition: opacity 0.3s ease;
-  max-width: 100%;
-  height: auto;
-  background-color: #f1f5f9;
 }
 
 .event-card:hover .event-image-item img {
   opacity: 0.92;
 }
 
-
-
-
+/* Layouts by image count */
+.event-images--count-1 {
+  display: block;
+}
 .event-images--count-1 .event-image-item {
   width: 100%;
   height: 300px;
-  background-color: #f1f5f9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  object-fit: contain;
 }
-
 
 .event-images--count-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.9rem;
 }
-
 .event-images--count-2 .event-image-item {
   height: 300px;
-  background-color: #f1f5f9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  object-fit: contain;
-}
-
-@media (max-width: 480px) {
-  .event-images {
-    flex-direction: column;
-    height: 100px;
-  }
-  .events-container {
-    padding: 1.5rem 1rem;
-  }
-
-  .events-title {
-    font-size: 1.6rem;
-    margin-bottom: 2rem;
-  }
-
-  .event-card {
-    padding: 1.3rem;
-    margin-bottom: 1.3rem;
-  }
-
-  .event-title {
-    font-size: 1.25rem;
-  }
-
-  .event-description {
-    font-size: 0.95rem;
-    -webkit-line-clamp: 2;
-  }
-
-  .event-image-item {
-    height: 100%;
-    max-height: 150px;
-    background-color: #f1f5f9;
-    width: 100%;
-    height: auto;
-    background-color: #f1f5f9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .event-image-item img {
-    max-height: 80px;
-    height: 100%;
-    object-fit: contain;
-    background-color: #f1f5f9;
-  }
-
 }
 
 .event-images--count-3 {
@@ -224,23 +160,16 @@
   grid-template-rows: auto auto;
   gap: 0.9rem;
 }
-
 .event-images--count-3 .event-image-item:nth-child(1),
 .event-images--count-3 .event-image-item:nth-child(2) {
   height: 300px;
-  background-color: #f1f5f9;
 }
-
 .event-images--count-3 .event-image-item:nth-child(3) {
   grid-column: 1 / span 2;
   height: 150px;
-  background-color: #f1f5f9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  object-fit: contain;
 }
 
+/* --- Медиа-запросы --- */
 
 @media (max-width: 768px) {
   .events-container {
@@ -264,27 +193,19 @@
     font-size: 1rem;
   }
 
+  /* На мобильных — один столбец */
   .event-images--count-2,
   .event-images--count-3 {
     grid-template-columns: 1fr;
   }
 
-  .event-images--count-2 .event-image-item,
-  .event-images--count-3 .event-image-item {
+  .event-image-item {
+    width: 100%;
     height: 120px;
-    object-fit: contain;
   }
 
   .event-images--count-3 .event-image-item:nth-child(3) {
     grid-column: 1;
-    object-fit: contain;
-  }
-
-  .event-image-item {
-    width: 100%;
-    height: 120px;
-    background-color: #f1f5f9;
-    object-fit: contain;
   }
 }
 
@@ -312,19 +233,12 @@
     -webkit-line-clamp: 2;
   }
 
-  .event-images--count-2 .event-image-item,
-  .event-images--count-3 .event-image-item {
-    height: 100px;
-  }
-
   .event-image-item {
-    width: 100%;
     height: 100px;
-    background-color: #f1f5f9;
-    object-fit: contain;
   }
 }
 
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .event-card,
   .event-image-item,
