@@ -158,6 +158,100 @@
   margin-top: 2rem;
 }
 
+.admin-events-section {
+  margin-top: 2rem;
+  padding: 1.5rem 0;
+}
+
+.admin-events-section h3 {
+  font-size: 1.4rem;
+  color: #0f172a;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.admin-events-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.admin-event-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(226, 232, 240, 0.7);
+  transition: all 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.admin-event-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, #ef4444, #dc2626);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.4s ease;
+}
+
+.admin-event-card:hover::before,
+.admin-event-card:focus::before {
+  transform: scaleY(1);
+}
+
+.admin-event-card h4 {
+  font-size: 1.2rem;
+  color: #0f172a;
+  margin: 0 0 0.8rem 0;
+  font-weight: 700;
+}
+
+.admin-event-card p {
+  color: #334155;
+  line-height: 1.5;
+  margin: 0 0 1.2rem 0;
+  font-size: 0.95rem;
+}
+
+.admin-event-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.delete-btn {
+  background: linear-gradient(to right, #ef4444, #dc2626);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.25);
+}
+
+.delete-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35);
+}
+
+.delete-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3);
+}
+
 @media (max-width: 768px) {
   .admin-container {
     padding: 1.8rem 1.2rem;
@@ -184,6 +278,10 @@
     padding: 0.85rem 1.2rem;
     font-size: 1rem;
   }
+
+  .admin-events-list {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 480px) {
@@ -209,18 +307,24 @@
     padding: 0.8rem 1rem;
     font-size: 0.95rem;
   }
+
+  .admin-event-card {
+    padding: 1.2rem;
+  }
 }
 
 
 @media (prefers-reduced-motion: reduce) {
   .admin-profile-card,
-  .admin-actions button {
+  .admin-actions button,
+  .admin-event-card {
     transition: none !important;
     transform: none !important;
     animation: none !important;
   }
 
-  .admin-profile-card::before {
+  .admin-profile-card::before,
+  .admin-event-card::before {
     transition: none !important;
   }
 }

@@ -8,6 +8,8 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
 function AddEvent() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [date, setDate] = useState("");
+  const [location, setLocation] = useState("");
   const [imageFiles, setImageFiles] = useState([]);
   const [previewUrls, setPreviewUrls] = useState([]);
   const [message, setMessage] = useState("");
@@ -73,6 +75,8 @@ function AddEvent() {
     const formData = new FormData();
     formData.append("title", title.trim());
     formData.append("description", description.trim());
+    if (date) formData.append("date", date);
+    if (location) formData.append("location", location.trim());
     imageFiles.forEach(file => formData.append("images", file));
 
     try {
@@ -116,6 +120,28 @@ return (
             onChange={e => setTitle(e.target.value)}
             required
             placeholder="Например: Открытая лекция по веб-разработке"
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="date">Дата и время *</label>
+          <input
+            id="date"
+            type="datetime-local"
+            value={date}
+            onChange={e => setDate(e.target.value)}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="location">Место проведения</label>
+          <input
+            id="location"
+            type="text"
+            value={location}
+            onChange={e => setLocation(e.target.value)}
+            placeholder="Например: ауд. 201, корпус 3"
           />
         </div>
 
@@ -178,7 +204,7 @@ return (
         <button
           type="submit"
           className="submit-btn"
-          disabled={isSubmitting || !title.trim() || !description.trim()}
+          disabled={isSubmitting || !title.trim() || !description.trim() || !date}
         >
           {isSubmitting ? "Отправка…" : "Добавить мероприятие"}
         </button>

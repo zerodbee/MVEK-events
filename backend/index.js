@@ -82,7 +82,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.get("/getevents", async (req, res) => {
   try {
-    const events = await Event.find().select('title description imageUrls');
+    const events = await Event.find().select('title description imageUrls date location').sort({ date: -1 });
     res.json(events);
   } catch (error) {
     console.error("GET /getevents error:", error);
@@ -105,7 +105,7 @@ app.get("/getevent/:id", async (req, res) => {
 
 app.post("/addevents", upload.array("images", 5), async (req, res) => {
   try {
-    const { title, description } = req.body;
+    const { title, description, date, location } = req.body;
 
     if (!title?.trim() || !description?.trim()) {
       return res.status(400).json({ message: "title и description обязательны" });
@@ -113,10 +113,12 @@ app.post("/addevents", upload.array("images", 5), async (req, res) => {
 
     const imageUrls = req.files?.map(file => `/uploads/${file.filename}`) || [];
 
-    const newEvent = new Event({ 
-      title: title.trim(), 
+    const newEvent = new Event({
+      title: title.trim(),
       description: description.trim(),
-      imageUrls 
+      date: date ? new Date(date) : null,
+      location: location?.trim(),
+      imageUrls
     });
     const saved = await newEvent.save();
 
@@ -348,6 +350,35 @@ app.post("/geteventsbyids", async (req, res) => {
   } catch (e) {
     console.error("POST /geteventsbyids error:", e);
     res.status(500).json({ message: "Ошибка получения мероприятий" });
+  }
+});
+
+app.delete("/deleteevent/:id", authenticate, async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    // Check if user is admin
+    const userRole = Array.isArray(req.user.role) ? req.user.role[0] : req.user.role;
+    if (userRole !== "admin") {
+      return res.status(403).json({ message: "Доступ запрещен" });
+    }
+
+    // Validate ObjectId
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Некорректный ID мероприятия" });
+    }
+
+    // Find and delete the event
+    const deletedEvent = await Event.findByIdAndDelete(id);
+    
+    if (!deletedEvent) {
+      return res.status(404).json({ message: "Мероприятие не найдено" });
+    }
+
+    res.json({ message: "Мероприятие успешно удалено" });
+  } catch (error) {
+    console.error("DELETE /deleteevent error:", error);
+    res.status(500).json({ message: "Ошибка сервера при удалении мероприятия" });
   }
 });
 

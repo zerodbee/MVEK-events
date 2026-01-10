@@ -62,6 +62,12 @@ function Events() {
                 ? event.description.substring(0, 160) + '…'
                 : event.description}
             </p>
+            
+            {event.date && (
+              <p className="event-date">
+                <strong>Дата:</strong> {new Date(event.date).toLocaleDateString("ru-RU")}
+              </p>
+            )}
 
             {event.imageUrls?.length > 0 && (
               <div

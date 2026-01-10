@@ -4,8 +4,14 @@ import Layout from '../Layout';
 import LogoutButton from './LogoutButton.jsx'; 
 import AddEvent from "./AddEvent.jsx";
 import './Admin.css';
+
+// Define backend URL as a constant
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
+
 function Admin() {
   const [payload, setPayload] = useState(null);
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate(); 
 
   useEffect(() => {
@@ -32,30 +38,102 @@ function Admin() {
     }
   }, [navigate]);
 
+  // Fetch events when component mounts
+  useEffect(() => {
+    if (!payload) return;
+    
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch(`${BACKEND_URL}/getevents`);
+        if (!response.ok) throw new Error("Network response was not ok");
+        const data = await response.json();
+        setEvents(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Ошибка при получении мероприятий:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, [payload]);
+
+  const handleDeleteEvent = async (eventId) => {
+    if (!window.confirm("Вы уверены, что хотите удалить это мероприятие?")) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`${BACKEND_URL}/deleteevent/${eventId}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+      });
+
+      const data = await response.json();
+      
+      if (response.ok) {
+        // Remove deleted event from the list
+        setEvents(events.filter(event => event._id !== eventId));
+        alert("Мероприятие успешно удалено");
+      } else {
+        alert(`Ошибка: ${data.message}`);
+      }
+    } catch (error) {
+      console.error("Ошибка при удалении мероприятия:", error);
+      alert("Ошибка сети при удалении мероприятия");
+    }
+  };
+
   if (!payload) return <Layout><p>Загрузка...</p></Layout>;
 
-return (
-  <Layout>
-    <div className="admin-container">
-      <h2 className="admin-title">Админ-панель</h2>
-      <div className="admin-profile-card">
-        <ul className="admin-profile-list">
-          <li><strong>ID:</strong>{payload.id}</li>
-          <li>@{payload.login}</li>
-          <li>{payload.name} {payload.surname} {payload.lastname || ""}</li>
-          <li><strong>Роль:</strong>{payload.role?.[0] || payload.role}</li>
-        </ul>
-        <LogoutButton />
+  return (
+    <Layout>
+      <div className="admin-container">
+        <h2 className="admin-title">Админ-панель</h2>
+        <div className="admin-profile-card">
+          <ul className="admin-profile-list">
+            <li><strong>ID:</strong>{payload.id}</li>
+            <li>@{payload.login}</li>
+            <li>{payload.name} {payload.surname} {payload.lastname || ""}</li>
+            <li><strong>Роль:</strong>{payload.role?.[0] || payload.role}</li>
+          </ul>
+          <LogoutButton />
+        </div>
+
+        <div className="admin-actions">
+          <AddEvent />
+          
+          <div className="admin-events-section">
+            <h3>Управление мероприятиями</h3>
+            {loading ? (
+              <p>Загрузка мероприятий...</p>
+            ) : events.length === 0 ? (
+              <p>Нет мероприятий для отображения</p>
+            ) : (
+              <div className="admin-events-list">
+                {events.map(event => (
+                  <div key={event._id} className="admin-event-card">
+                    <h4>{event.title}</h4>
+                    <p>{event.description.substring(0, 100)}...</p>
+                    <div className="admin-event-actions">
+                      <button 
+                        className="delete-btn"
+                        onClick={() => handleDeleteEvent(event._id)}
+                      >
+                        Удалить
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
       </div>
-
-      <div className="admin-actions">
-
-        <AddEvent />
-
-      </div>
-    </div>
-  </Layout>
-);
+    </Layout>
+  );
 }
 
 export default Admin;
