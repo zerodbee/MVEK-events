@@ -80,11 +80,6 @@ export default function EventDetail() {
           <strong>Место:</strong> {event.location}
         </p>
       )}
-      {event.passed && (
-        <p className="event-detail-meta passed-badge">
-          Мероприятие уже прошло
-        </p>
-      )}
         <RegisterEvent eventId={event._id?.toString()} />
 
     </div></Layout>

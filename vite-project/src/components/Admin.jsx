@@ -162,9 +162,6 @@ function Admin() {
                           Отметить как прошедшее
                         </button>
                       )}
-                      {event.passed && (
-                        <span className="passed-badge">Прошедшее мероприятие</span>
-                      )}
                     </div>
                   </div>
                 ))}
