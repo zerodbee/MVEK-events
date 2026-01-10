@@ -76,6 +76,10 @@
   object-fit: cover;
   border-radius: 8px;
   background-color: #f0f3f7;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 .event-detail-meta {
@@ -85,6 +89,23 @@
   padding-left: 12px;
   display: flex;
   gap: 0.5rem;
+}
+
+@media (max-width: 480px) {
+  .event-detail-image {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .event-detail-image {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    object-fit: cover;
+  }
 }
 
 .event-detail-meta strong {

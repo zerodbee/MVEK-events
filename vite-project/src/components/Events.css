@@ -96,6 +96,8 @@
   padding-top: 1rem;
   border-top: 1px solid rgba(226, 232, 240, 0.6);
   margin-bottom: 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .event-image-item {
@@ -125,6 +127,8 @@
   object-fit: cover;
   display: block;
   transition: opacity 0.3s ease;
+  max-width: 100%;
+  height: auto;
 }
 
 .event-card:hover .event-image-item img {
@@ -148,6 +152,22 @@
 
 .event-images--count-2 .event-image-item {
   height: 300px;
+}
+
+@media (max-width: 480px) {
+  .event-images {
+    flex-direction: column;
+  }
+  
+  .event-image-item {
+    width: 100%;
+    height: auto;
+  }
+  
+  .event-image-item img {
+    height: 200px;
+    object-fit: cover;
+  }
 }
 
 .event-images--count-3 {
@@ -205,8 +225,8 @@
   }
 
   .event-image-item {
-    width: 64px;
-    height: 64px;
+    width: 100%;
+    height: 120px;
   }
 }
 
@@ -240,8 +260,8 @@
   }
 
   .event-image-item {
-    width: 56px;
-    height: 56px;
+    width: 100%;
+    height: 100px;
   }
 }
 
