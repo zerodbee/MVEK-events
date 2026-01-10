@@ -2,6 +2,7 @@
   max-width: 1000px;
   margin: 0 auto;
   padding: 50px;
+  width: 100%;
 }
 
 .event-detail-back-button {
@@ -62,12 +63,13 @@
 
 .event-detail-images {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1.25rem;
   margin-bottom: 1.5rem;
   padding-top: 1rem;
   padding-left: 12px;
   border-top: 1px solid #e0e4e8;
+  width: 100%;
 }
 
 .event-detail-image {
@@ -81,6 +83,7 @@
   display: block;
   margin: 0 auto;
   background-color: #f0f3f7;
+  overflow: hidden;
 }
 
 .event-detail-meta {
