@@ -172,6 +172,7 @@
 @media (max-width: 480px) {
   .event-images {
     flex-direction: column;
+    height: 100px;
   }
   .events-container {
     padding: 1.5rem 1rem;
