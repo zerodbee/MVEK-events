@@ -105,7 +105,7 @@ app.get("/getevent/:id", async (req, res) => {
 
 app.post("/addevents", upload.array("images", 5), async (req, res) => {
   try {
-    const { title, description } = req.body;
+    const { title, description, date, location } = req.body;
 
     if (!title?.trim() || !description?.trim()) {
       return res.status(400).json({ message: "title и description обязательны" });
@@ -113,10 +113,12 @@ app.post("/addevents", upload.array("images", 5), async (req, res) => {
 
     const imageUrls = req.files?.map(file => `/uploads/${file.filename}`) || [];
 
-    const newEvent = new Event({ 
-      title: title.trim(), 
+    const newEvent = new Event({
+      title: title.trim(),
       description: description.trim(),
-      imageUrls 
+      date: date ? new Date(date) : null,
+      location: location?.trim(),
+      imageUrls
     });
     const saved = await newEvent.save();
 

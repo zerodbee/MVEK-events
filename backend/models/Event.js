@@ -3,7 +3,7 @@ import { Schema, model } from 'mongoose';
 const EventSchema = new Schema({
   title: { type: String, required: true, trim: true },
   description: { type: String, required: true, trim: true },
-  date: { type: Date, default: Date.now },
+  date: { type: Date },
   location: { type: String, trim: true },
   imageUrls: {
     type: [String],
