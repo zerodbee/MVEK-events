@@ -196,9 +196,6 @@
     -webkit-line-clamp: 2;
   }
 
-
-<<<<<<< HEAD
-=======
   .event-image-item {
     height: 100%;
     max-height: 150px;
@@ -217,7 +214,7 @@
     object-fit: contain;
     background-color: #f1f5f9;
   }
->>>>>>> d49267c7033f71fe98c255ad3a4b66a4aaeaaa97
+
 }
 
 .event-images--count-3 {
