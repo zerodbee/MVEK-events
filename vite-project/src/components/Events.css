@@ -166,7 +166,7 @@
 }
 .event-images--count-3 .event-image-item:nth-child(3) {
   grid-column: 1 / span 2;
-  height: 150px;
+  height: 300px;
 }
 
 /* --- Медиа-запросы --- */
