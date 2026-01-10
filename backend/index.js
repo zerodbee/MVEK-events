@@ -13,7 +13,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = 5000;
-const DB_URL = "mongodb://localhost:27017/mveu";
+const DB_URL = "mongodb://mongodb:27017/mveu";
 
 const JWT_SECRET = process.env.JWT_SECRET || 'viktoria';
 
