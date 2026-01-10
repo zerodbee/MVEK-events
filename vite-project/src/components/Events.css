@@ -236,12 +236,14 @@
 
   .event-images--count-2 .event-image-item,
   .event-images--count-3 .event-image-item {
-    height: 100px;
+    height: 100%;
+    max-height: 100px;
   }
 
   .event-image-item {
-    width: 56px;
-    height: 56px;
+    width: 100%;
+    height: 100%;
+    max-height: 56px;
   }
 }
 
