@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Layout from "../Layout";
 import './EventDetail.css';
-import RegisterEvent from "./registerEvent";
+import RegisterEvent from "./RegisterEvent";
 
 export default function EventDetail() {
   const { id } = useParams();
