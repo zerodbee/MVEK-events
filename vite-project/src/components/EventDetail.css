@@ -75,7 +75,8 @@
 .event-detail-image {
   width: 100%;
   aspect-ratio: 4 / 3;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center;
   border-radius: 8px;
   background-color: #f0f3f7;
   max-width: 100%;
@@ -199,7 +200,8 @@
   .event-detail-image {
     aspect-ratio: 1 / 1;
     background-color: #f0f3f7;
-    object-fit: contain;
+    object-fit: cover;
+    object-position: center;
   }
 
   .event-detail-meta {
