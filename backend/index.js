@@ -351,6 +351,35 @@ app.post("/geteventsbyids", async (req, res) => {
   }
 });
 
+app.delete("/deleteevent/:id", authenticate, async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    // Check if user is admin
+    const userRole = Array.isArray(req.user.role) ? req.user.role[0] : req.user.role;
+    if (userRole !== "admin") {
+      return res.status(403).json({ message: "Доступ запрещен" });
+    }
+
+    // Validate ObjectId
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Некорректный ID мероприятия" });
+    }
+
+    // Find and delete the event
+    const deletedEvent = await Event.findByIdAndDelete(id);
+    
+    if (!deletedEvent) {
+      return res.status(404).json({ message: "Мероприятие не найдено" });
+    }
+
+    res.json({ message: "Мероприятие успешно удалено" });
+  } catch (error) {
+    console.error("DELETE /deleteevent error:", error);
+    res.status(500).json({ message: "Ошибка сервера при удалении мероприятия" });
+  }
+});
+
 async function startApp() {
   try {
     await mongoose.connect(DB_URL);
