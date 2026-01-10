@@ -98,6 +98,7 @@
   margin-bottom: 1rem;
   width: 100%;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .event-image-item {
@@ -107,9 +108,6 @@
   position: relative;
   transition: transform 0.25s ease, border-radius 0.25s ease;
   background-color: #f1f5f9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .event-image-item::after {
@@ -128,12 +126,14 @@
 .event-image-item img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   display: block;
   transition: opacity 0.3s ease;
   max-width: 100%;
   height: auto;
   background-color: #f1f5f9;
+  min-width: 100%;
+  min-height: 100%;
 }
 
 .event-card:hover .event-image-item img {
@@ -150,7 +150,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  object-fit: contain;
 }
 
 
@@ -166,7 +165,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  object-fit: contain;
 }
 
 @media (max-width: 480px) {
@@ -217,7 +215,7 @@
   .event-image-item img {
     max-height: 80px;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     background-color: #f1f5f9;
   }
 }
@@ -242,7 +240,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  object-fit: contain;
 }
 
 
@@ -288,7 +285,6 @@
     width: 100%;
     height: 120px;
     background-color: #f1f5f9;
-    object-fit: contain;
   }
 }
 
@@ -325,7 +321,6 @@
     width: 100%;
     height: 100px;
     background-color: #f1f5f9;
-    object-fit: contain;
   }
 }
 
@@ -384,4 +379,10 @@
 
 .event-detail-btn:active {
   transform: translateY(0);
+}
+
+/* Fix for image display issues */
+.event-image-item img {
+  min-width: 100%;
+  min-height: 100%;
 }
