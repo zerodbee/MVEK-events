@@ -82,7 +82,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.get("/getevents", async (req, res) => {
   try {
-    const events = await Event.find().select('title description imageUrls date location').sort({ date: -1 });
+    const events = await Event.find().select('title description imageUrls date location passed').sort({ date: -1 });
     res.json(events);
   } catch (error) {
     console.error("GET /getevents error:", error);
@@ -353,7 +353,7 @@ app.post("/geteventsbyids", async (req, res) => {
   }
 });
 
-app.delete("/deleteevent/:id", authenticate, async (req, res) => {
+app.put("/event/:id/pass", authenticate, async (req, res) => {
   try {
     const { id } = req.params;
     
@@ -368,17 +368,21 @@ app.delete("/deleteevent/:id", authenticate, async (req, res) => {
       return res.status(400).json({ message: "Некорректный ID мероприятия" });
     }
 
-    // Find and delete the event
-    const deletedEvent = await Event.findByIdAndDelete(id);
+    // Find and update the event
+    const updatedEvent = await Event.findByIdAndUpdate(
+      id,
+      { passed: true },
+      { new: true }
+    );
     
-    if (!deletedEvent) {
+    if (!updatedEvent) {
       return res.status(404).json({ message: "Мероприятие не найдено" });
     }
 
-    res.json({ message: "Мероприятие успешно удалено" });
+    res.json({ message: "Мероприятие отмечено как прошедшее", event: updatedEvent });
   } catch (error) {
-    console.error("DELETE /deleteevent error:", error);
-    res.status(500).json({ message: "Ошибка сервера при удалении мероприятия" });
+    console.error("PUT /event/:id/pass error:", error);
+    res.status(500).json({ message: "Ошибка сервера при обновлении мероприятия" });
   }
 });
 

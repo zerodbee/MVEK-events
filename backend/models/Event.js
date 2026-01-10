@@ -5,6 +5,7 @@ const EventSchema = new Schema({
   description: { type: String, required: true, trim: true },
   date: { type: Date },
   location: { type: String, trim: true },
+  passed: { type: Boolean, default: false },
   imageUrls: {
     type: [String],
     validate: [

@@ -122,6 +122,17 @@
   min-width: max-content;
 }
 
+.passed-badge {
+  background: #059669;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: inline-block;
+  margin: 0.5rem 0;
+}
+
 
 @media (max-width: 768px) {
   .event-detail-back-button,

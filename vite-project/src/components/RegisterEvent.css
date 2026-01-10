@@ -104,3 +104,10 @@ width: 300px;
 .register-btn-placeholder {
   height: 44px;
 }
+
+.register-btn-disabled {
+  background: #f1f5f9;
+  color: #64748b;
+  border-color: #cbd5e1;
+  cursor: not-allowed;
+}

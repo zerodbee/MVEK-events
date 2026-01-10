@@ -86,6 +86,36 @@ function Admin() {
     }
   };
 
+  const handleMarkAsPassed = async (eventId) => {
+    if (!window.confirm("Вы уверены, что хотите отметить это мероприятие как прошедшее?")) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`${BACKEND_URL}/event/${eventId}/pass`, {
+        method: "PUT",
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+      });
+
+      const data = await response.json();
+      
+      if (response.ok) {
+        // Update the event in the list
+        setEvents(events.map(event =>
+          event._id === eventId ? { ...event, passed: true } : event
+        ));
+        alert("Мероприятие отмечено как прошедшее");
+      } else {
+        alert(`Ошибка: ${data.message}`);
+      }
+    } catch (error) {
+      console.error("Ошибка при отметке мероприятия как прошедшего:", error);
+      alert("Ошибка сети при отметке мероприятия как прошедшего");
+    }
+  };
+
   if (!payload) return <Layout><p>Загрузка...</p></Layout>;
 
   return (
@@ -118,12 +148,23 @@ function Admin() {
                     <h4>{event.title}</h4>
                     <p>{event.description.substring(0, 100)}...</p>
                     <div className="admin-event-actions">
-                      <button 
+                      <button
                         className="delete-btn"
                         onClick={() => handleDeleteEvent(event._id)}
                       >
                         Удалить
                       </button>
+                      {!event.passed && (
+                        <button
+                          className="pass-btn"
+                          onClick={() => handleMarkAsPassed(event._id)}
+                        >
+                          Отметить как прошедшее
+                        </button>
+                      )}
+                      {event.passed && (
+                        <span className="passed-badge">Прошедшее мероприятие</span>
+                      )}
                     </div>
                   </div>
                 ))}

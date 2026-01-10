@@ -9,13 +9,21 @@ function RegisterEvent({ eventId }) {
   const [registered, setRegistered] = useState(false);
   const [error, setError] = useState(null);
   const [isRegisteredChecked, setIsRegisteredChecked] = useState(false);
+  const [eventPassed, setEventPassed] = useState(false);
 
   useEffect(() => {
-    const checkRegistration = async () => {
+    const checkRegistrationAndEvent = async () => {
       const token = localStorage.getItem("token");
       if (!token || !eventId) return;
 
       try {
+        // Check if event has passed
+        const eventRes = await fetch(`${BACKEND_URL}/getevent/${eventId}`);
+        if (eventRes.ok) {
+          const event = await eventRes.json();
+          setEventPassed(event.passed || false);
+        }
+
         const userId = getUserIdFromToken(token);
         if (!userId) return;
 
@@ -26,13 +34,13 @@ function RegisterEvent({ eventId }) {
         const isRegistered = userEventIds.includes(eventId);
         setRegistered(isRegistered);
       } catch (err) {
-        console.warn("Не удалось проверить статус записи", err);
+        console.warn("Не удалось проверить статус записи или мероприятие", err);
       } finally {
         setIsRegisteredChecked(true);
       }
     };
 
-    checkRegistration();
+    checkRegistrationAndEvent();
   }, [eventId]);
 
   const getUserIdFromToken = (token) => {
@@ -97,10 +105,21 @@ function RegisterEvent({ eventId }) {
     return <div className="register-btn-placeholder"></div>;
   }
 
+  if (eventPassed) {
+    return (
+      <button
+        className="register-btn register-btn-disabled"
+        disabled
+      >
+        Мероприятие уже прошло
+      </button>
+    );
+  }
+
   if (registered) {
     return (
-      <button 
-        className="register-btn register-btn-success" 
+      <button
+        className="register-btn register-btn-success"
         disabled
       >
         Вы записаны
