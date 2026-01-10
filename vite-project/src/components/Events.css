@@ -124,12 +124,11 @@
 
 .event-image-item img {
   width: 100%;
-  height: 100%;
-  object-fit: cover; /* лучше cover для заполнения */
   display: block;
   transition: opacity 0.3s ease;
-  min-width: 100%;
-  min-height: 100%;
+  object-fit: contain; /* Changed from cover to contain to prevent cropping */
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .event-card:hover .event-image-item img {
@@ -294,10 +293,4 @@
 
 .event-detail-btn:active {
   transform: translateY(0);
-}
-
-/* Fix for image display issues */
-.event-image-item img {
-  min-width: 100%;
-  min-height: 100%;
 }

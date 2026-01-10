@@ -73,7 +73,7 @@
 .event-detail-image {
   width: 100%;
   aspect-ratio: 4 / 3;
-  object-fit: cover;
+  object-fit: contain; /* Changed from cover to contain to prevent cropping */
   border-radius: 8px;
   background-color: #f0f3f7;
   max-width: 100%;
@@ -183,9 +183,4 @@
     justify-content: center;
   }
 
-/* Fix for image display issues */
-.event-detail-image {
-  min-width: 100%;
-  min-height: 100%;
-}
 }
