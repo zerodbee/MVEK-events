@@ -12,6 +12,11 @@ RUN npm ci
 # Copy source code
 COPY . .
 
+ARG VITE_BACKEND_URL=http://localhost:5000
+
+# Set environment variable
+ENV VITE_BACKEND_URL=$VITE_BACKEND_URL
+
 # Build the project
 RUN npm run build
 
