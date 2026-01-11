@@ -150,6 +150,7 @@
 
   .event-detail-title {
     font-size: 1.6rem;
+    margin-left: 12px;
   }
 
   .event-detail-description {
