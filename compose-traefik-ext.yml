@@ -17,20 +17,18 @@ services:
     networks:
       - app-network
       - traefik
-    expose:
-      - 5000
     labels:
       - "traefik.http.routers.backend.rule=Host(`${BACKEND_DOMAIN}`)"
       - "traefik.http.routers.backend.entrypoints=websecure"
       - "traefik.http.routers.backend.tls.certresolver=myresolver"
-      - "traefik.http.routers.backend.tls.domains[0].main=${DOMAIN}"
+      - "traefik.http.routers.backend.tls.domains[0].main=${BACKEND_DOMAIN}"
 
   frontend:
     build:
       context: ./vite-project
       dockerfile: Dockerfile
       args:
-        - VITE_BACKEND_URL=https://${BACKEND_DOMAIN}/backend
+        - VITE_BACKEND_URL=https://${BACKEND_DOMAIN}/
     container_name: frontend
     restart: always
     env_file:
