@@ -20,7 +20,7 @@ services:
     expose:
       - 5000
     labels:
-      - "traefik.http.routers.backend.rule=Host(`${DOMAIN}`) && Path(`/backend`)"
+      - "traefik.http.routers.backend.rule=Host(`${BACKEND_DOMAIN}`)"
       - "traefik.http.routers.backend.entrypoints=websecure"
       - "traefik.http.routers.backend.tls.certresolver=myresolver"
       - "traefik.http.routers.backend.tls.domains[0].main=${DOMAIN}"
@@ -30,7 +30,7 @@ services:
       context: ./vite-project
       dockerfile: Dockerfile
       args:
-        - VITE_BACKEND_URL=https://${DOMAIN}/backend
+        - VITE_BACKEND_URL=https://${BACKEND_DOMAIN}/backend
     container_name: frontend
     restart: always
     env_file:
