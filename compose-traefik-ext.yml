@@ -61,5 +61,6 @@ volumes:
 
 networks:
   app-network:
-  traefik:
     driver: bridge
+  traefik:
+    external: true
