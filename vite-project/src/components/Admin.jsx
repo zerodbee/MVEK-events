@@ -75,7 +75,7 @@ function Admin() {
     }
 
     try {
-      const response = await fetch(`${BACKEND_URL}/deleteevent/${eventId}`, {
+      const response = await fetch(`${BACKEND_URL}/event/${eventId}`, {
         method: "DELETE",
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("token")}`

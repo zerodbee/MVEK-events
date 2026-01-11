@@ -32,7 +32,7 @@ services:
       context: ./vite-project
       dockerfile: Dockerfile
       args:
-        - VITE_BACKEND_URL
+        - VITE_BACKEND_URL=http://localhost:5000
     container_name: frontend
     restart: always
     ports:
