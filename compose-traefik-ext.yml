@@ -14,30 +14,14 @@ services:
       - uploads:/app/uploads
     depends_on:
       - mongodb
-      - traefik
     networks:
       - app-network
+      - traefik
     labels:
-      # Traefik labels for backend service
-      - "traefik.enable=true"
-      - "traefik.http.routers.backend.rule=Host(`${DOMAIN}`) && PathPrefix(`/backend`)"
+      - "traefik.http.routers.backend.rule=Host(`${DOMAIN}`) && Path(`/backend`)"
       - "traefik.http.routers.backend.entrypoints=websecure"
-      - "traefik.http.routers.backend.tls=true"
       - "traefik.http.routers.backend.tls.certresolver=myresolver"
-      - "traefik.http.routers.backend.middlewares=backend-stripprefix"
-      - "traefik.http.middlewares.backend-stripprefix.stripprefix.prefixes=/backend"
-      - "traefik.http.services.backend.loadbalancer.server.port=5000"
-      - "traefik.http.routers.backend.service=backend"
-
-      # For www alias
-      - "traefik.http.routers.backend-www.rule=Host(`www.${DOMAIN}`) && PathPrefix(`/backend`)"
-      - "traefik.http.routers.backend-www.entrypoints=websecure"
-      - "traefik.http.routers.backend-www.tls=true"
-      - "traefik.http.routers.backend-www.tls.certresolver=myresolver"
-      - "traefik.http.routers.backend-www.middlewares=backend-stripprefix,www-redirect"
-      - "traefik.http.middlewares.www-redirect.redirectregex.regex=^https://www\\.${DOMAIN}(/.*)?"
-      - "traefik.http.middlewares.www-redirect.redirectregex.replacement=https://${DOMAIN}$1"
-      - "traefik.http.services.backend-www.loadbalancer.server.port=5000"
+      - "traefik.http.routers.backend.tls.domains[0].main=${DOMAIN}"
 
   frontend:
     build:
@@ -51,28 +35,14 @@ services:
       - .env
     depends_on:
       - backend
-      - traefik
     networks:
       - app-network
+      - traefik
     labels:
-      # Traefik labels for frontend service
-      - "traefik.enable=true"
       - "traefik.http.routers.frontend.rule=Host(`${DOMAIN}`)"
       - "traefik.http.routers.frontend.entrypoints=websecure"
-      - "traefik.http.routers.frontend.tls=true"
       - "traefik.http.routers.frontend.tls.certresolver=myresolver"
-      - "traefik.http.services.frontend.loadbalancer.server.port=80"
-      - "traefik.http.routers.frontend.service=frontend"
-
-      # For www alias
-      - "traefik.http.routers.frontend-www.rule=Host(`www.${DOMAIN}`)"
-      - "traefik.http.routers.frontend-www.entrypoints=websecure"
-      - "traefik.http.routers.frontend-www.tls=true"
-      - "traefik.http.routers.frontend-www.tls.certresolver=myresolver"
-      - "traefik.http.routers.frontend-www.middlewares=www-redirect"
-      - "traefik.http.middlewares.www-redirect.redirectregex.regex=^https://www\\.${DOMAIN}(/.*)?"
-      - "traefik.http.middlewares.www-redirect.redirectregex.replacement=https://${DOMAIN}$1"
-      - "traefik.http.services.frontend-www.loadbalancer.server.port=80"
+      - "traefik.http.routers.frontend.tls.domains[0].main=${DOMAIN}"
 
   mongodb:
     image: mongo:latest
