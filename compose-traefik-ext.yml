@@ -36,7 +36,6 @@ services:
     depends_on:
       - backend
     networks:
-      - app-network
       - traefik
     labels:
       - "traefik.http.routers.frontend.rule=Host(`${DOMAIN}`)"
