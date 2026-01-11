@@ -5,7 +5,6 @@ import LogoutButton from './LogoutButton.jsx';
 import AddEvent from "./AddEvent.jsx";
 import './Admin.css';
 
-// Define backend URL as a constant
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
 
 function Admin() {
@@ -38,7 +37,7 @@ function Admin() {
     }
   }, [navigate]);
 
-  // Fetch events when component mounts
+
   useEffect(() => {
     if (!payload) return;
     
@@ -58,12 +57,12 @@ function Admin() {
     fetchEvents();
   }, [payload]);
 
-  // Helper function to check if event date is today or in the past
+
   const isEventTodayOrPast = (eventDate) => {
     if (!eventDate) return false;
     const eventDateObj = new Date(eventDate);
     const today = new Date();
-    // Set time to 00:00:00 for accurate date comparison
+
     eventDateObj.setHours(0, 0, 0, 0);
     today.setHours(0, 0, 0, 0);
     return eventDateObj <= today;
@@ -85,7 +84,6 @@ function Admin() {
       const data = await response.json();
       
       if (response.ok) {
-        // Remove deleted event from the list
         setEvents(events.filter(event => event._id !== eventId));
         alert("Мероприятие успешно удалено");
       } else {
@@ -113,7 +111,6 @@ function Admin() {
       const data = await response.json();
       
       if (response.ok) {
-        // Update the event in the list
         setEvents(events.map(event =>
           event._id === eventId ? { ...event, passed: true } : event
         ));

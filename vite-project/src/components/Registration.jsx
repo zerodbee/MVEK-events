@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Layout from '../Layout';
 import './Registration.css';
 
-// Define backend URL as a constant
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
 
 function Registration() {

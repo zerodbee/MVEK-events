@@ -3,18 +3,14 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-// Get the directory name
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// MongoDB connection URL
 const DB_URL = process.env.DB_URL || "mongodb://mongodb:27017/mveu";
 
-// Import models
 import User from '../models/User.js';
 import Event from '../models/Event.js';
 
-// Sample data
 const sampleUsers = [
   {
     login: "admin",
@@ -84,11 +80,9 @@ async function seedDatabase() {
   let connection;
   
   try {
-    // Connect to MongoDB
     connection = await mongoose.connect(DB_URL);
     console.log("Подключение к MongoDB установлено");
 
-    // Check if data already exists
     const existingUsers = await User.countDocuments();
     const existingEvents = await Event.countDocuments();
     
@@ -103,17 +97,14 @@ async function seedDatabase() {
     await Event.deleteMany({});
     console.log("Существующие данные очищены");
 
-    // Insert sample users
     const createdUsers = await User.insertMany(sampleUsers);
     console.log(`Создано ${createdUsers.length} пользователей`);
 
-    // Insert sample events
     const createdEvents = await Event.insertMany(sampleEvents);
     console.log(`Создано ${createdEvents.length} мероприятий`);
 
     console.log("База данных успешно заполнена образцами данных");
     
-    // Close connection
     await mongoose.connection.close();
     console.log("Соединение с MongoDB закрыто");
     
@@ -126,5 +117,4 @@ async function seedDatabase() {
   }
 }
 
-// Run the seed function
 seedDatabase();

@@ -357,18 +357,16 @@ app.put("/event/:id/pass", authenticate, async (req, res) => {
   try {
     const { id } = req.params;
     
-    // Check if user is admin
     const userRole = Array.isArray(req.user.role) ? req.user.role[0] : req.user.role;
     if (userRole !== "admin") {
       return res.status(403).json({ message: "Доступ запрещен" });
     }
 
-    // Validate ObjectId
+
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(400).json({ message: "Некорректный ID мероприятия" });
     }
 
-    // Find and update the event
     const updatedEvent = await Event.findByIdAndUpdate(
       id,
       { passed: true },
