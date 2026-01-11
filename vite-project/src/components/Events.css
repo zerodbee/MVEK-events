@@ -120,7 +120,7 @@
 
 .event-card:hover .event-image-item {
   transform: scale(1.04);
-  border-radius: 10px;
+  border-radius: 0px;
 }
 
 .event-image-item img {
