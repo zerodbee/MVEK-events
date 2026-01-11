@@ -4,7 +4,7 @@ import Layout from "../Layout";
 import './EventDetail.css';
 import RegisterEvent from "./RegisterEvent";
 
-// Define backend URL as a constant
+
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
 
 export default function EventDetail() {

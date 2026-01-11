@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import './RegisterEvent.css';
 
-// Define backend URL as a constant
+
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
 
 function RegisterEvent({ eventId }) {
@@ -17,7 +17,7 @@ function RegisterEvent({ eventId }) {
       if (!token || !eventId) return;
 
       try {
-        // Check if event has passed
+
         const eventRes = await fetch(`${BACKEND_URL}/getevent/${eventId}`);
         if (eventRes.ok) {
           const event = await eventRes.json();

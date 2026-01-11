@@ -1,9 +1,8 @@
 .events-container {
-  max-width: 1080px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 2.5rem 1.8rem;
   min-height: 100vh;
-  width: 100%;
 }
 
 .events-title {
@@ -127,26 +126,22 @@
   width: 100%;
   display: block;
   transition: opacity 0.3s ease;
-  object-fit: contain; /* Changed from cover to contain to prevent cropping */
+  object-fit: contain;
   max-width: 100%;
   max-height: 100%;
-  aspect-ratio: 16 / 9;
-  object-position: center;
-  object-fit: cover;
 }
 
 .event-card:hover .event-image-item img {
   opacity: 0.92;
 }
 
-/* Layouts by image count */
+
 .event-images--count-1 {
   display: block;
 }
 .event-images--count-1 .event-image-item {
   width: 100%;
-  height: 100%;
-  overflow: hidden;
+  height: 350px;
 }
 
 .event-images--count-2 {
@@ -155,8 +150,7 @@
   gap: 0.9rem;
 }
 .event-images--count-2 .event-image-item {
-  height: 100%;
-  overflow: hidden;
+  height: 350px;
 }
 
 .event-images--count-3 {
@@ -167,16 +161,14 @@
 }
 .event-images--count-3 .event-image-item:nth-child(1),
 .event-images--count-3 .event-image-item:nth-child(2) {
-  height: 100%;
-  overflow: hidden;
+  height: 300px;
 }
 .event-images--count-3 .event-image-item:nth-child(3) {
   grid-column: 1 / span 2;
-  height: 100%;
-  overflow: hidden;
+  height: 300px;
 }
 
-/* --- Медиа-запросы --- */
+
 
 @media (max-width: 768px) {
   .events-container {
@@ -208,7 +200,7 @@
 
   .event-image-item {
     width: 100%;
-    overflow: hidden;
+    height: 120px;
   }
 
   .event-images--count-3 .event-image-item:nth-child(3) {
@@ -241,7 +233,7 @@
   }
 
   .event-image-item {
-    overflow: hidden;
+    height: 100px;
   }
 }
 
