@@ -28,7 +28,7 @@ services:
       context: ./vite-project
       dockerfile: Dockerfile
       args:
-        - VITE_BACKEND_URL=https://${BACKEND_DOMAIN}/
+        - VITE_BACKEND_URL=https://${BACKEND_DOMAIN}
     container_name: frontend
     restart: always
     env_file:
