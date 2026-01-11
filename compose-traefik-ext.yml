@@ -40,8 +40,6 @@ services:
     networks:
       - app-network
       - traefik
-    expose:
-      - 80
     labels:
       - "traefik.http.routers.frontend.rule=Host(`${DOMAIN}`)"
       - "traefik.http.routers.frontend.entrypoints=websecure"
