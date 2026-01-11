@@ -12,7 +12,7 @@ RUN npm ci
 # Copy source code
 COPY . .
 
-ARG VITE_BACKEND_URL=http://localhost:5000
+ARG VITE_BACKEND_URL
 
 # Set environment variable
 ENV VITE_BACKEND_URL=$VITE_BACKEND_URL
