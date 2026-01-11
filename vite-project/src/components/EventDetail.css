@@ -86,7 +86,7 @@
   overflow: hidden;
 }
 
-/* Desktop-specific larger images */
+
 @media (min-width: 769px) {
   .event-detail-images {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -146,7 +146,6 @@
 
   .event-detail-container {
     padding: 30px 20px;
-    text-align: center;
   }
 
   .event-detail-title {
