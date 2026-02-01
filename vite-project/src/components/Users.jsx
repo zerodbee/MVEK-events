@@ -62,50 +62,70 @@ export default function Users() {
   if (loading) return <div className="users-admin">Загрузка...</div>;
 
   return (
-  <div className="users-table-wrapper">
-  <table className="users-table">
-    <thead>
-      <tr>
-        <th>ФИО</th>
-        <th>Email</th>
-        <th>Действия</th>
-      </tr>
-    </thead>
-    <tbody>
-      {users.map(user => (
-        <tr key={user.id}>
-          <td>{user.fullName}</td>
-          <td>{user.email}</td>
-          <td>
-            <button
-              className="users-btn-toggle"
-              onClick={() => toggleUser(user)}
-            >
-              {selectedUserId === user.id ? 'Скрыть' : 'Записи'}
-            </button>
-          </td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-      {selectedUserId && (
-        <div className="users-events-detail">
-          <h3>Мероприятия пользователя</h3>
-          <ul>
-            {users
-              .find(u => u.id === selectedUserId)
-              ?.eventIds.map(id => eventsMap[id])
-              .filter(Boolean)
-              .map(event => (
-                <li key={event._id} className="users-event-item">
-                  <strong>{event.title}</strong> —{' '}
-                  {new Date(event.date).toLocaleDateString('ru-RU')}
-                  {event.location && ` — ${event.location}`}
-                </li>
-              ))}
-          </ul>
-        </div>
-      )}
+    <div className="users-admin">
+      <h2>Пользователи</h2>
+      <div className="users-table-wrapper">
+        <table className="users-table">
+          <thead>
+            <tr>
+              <th>ФИО</th>
+              <th>Email</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map(user => {
+              const isExpanded = selectedUserId === user.id;
+              const eventsToShow = isExpanded
+                ? user.eventIds
+                    .map(id => eventsMap[id])
+                    .filter(Boolean)
+                : [];
+
+              return (
+                <>
+                  <tr key={user.id}>
+                    <td>{user.fullName}</td>
+                    <td>{user.email}</td>
+                    <td>
+                      <button
+                        className="users-btn-toggle"
+                        onClick={() => toggleUser(user)}
+                      >
+                        {isExpanded ? 'Скрыть' : 'Записи'}
+                      </button>
+                    </td>
+                  </tr>
+
+
+                  {isExpanded && (
+                    <tr className="users-events-row">
+                      <td colSpan="3" className="users-events-cell">
+                        <div className="users-events-detail">
+                          <h3>Мероприятия пользователя</h3>
+                          {eventsToShow.length === 0 ? (
+                            <p>Не записан ни на одно мероприятие.</p>
+                          ) : (
+                            <ul>
+                              {eventsToShow.map(event => (
+                                <li key={event._id} className="users-event-item">
+                                  <strong>{event.title}</strong> —{' '}
+                                  {new Date(event.date).toLocaleDateString('ru-RU')}
+                                  {event.location && ` — ${event.location}`}
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                </>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
