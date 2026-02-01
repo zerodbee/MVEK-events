@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Layout from '../Layout';
 import LogoutButton from './LogoutButton.jsx';
 import AddEvent from "./AddEvent.jsx";
+import Users from "./Users.jsx";
 import './Admin.css';
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'
@@ -142,7 +143,7 @@ function Admin() {
 
         <div className="admin-actions">
           <AddEvent />
-          
+          <Users />
           <div className="admin-events-section">
             <h3>Управление мероприятиями</h3>
             {loading ? (

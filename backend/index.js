@@ -13,7 +13,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = 5000;
-const DB_URL = process.env.DB_URL || "mongodb://mongodb:27017/mveu";
+const DB_URL = process.env.DB_URL || "mongodb://localhost:27017/mveu";
 
 const JWT_SECRET = process.env.JWT_SECRET || 'viktoria';
 
@@ -410,6 +410,33 @@ app.delete("/event/:id", authenticate, async (req, res) => {
   } catch (error) {
     console.error("DELETE /event/:id error:", error);
     res.status(500).json({ message: "Ошибка сервера при удалении мероприятия" });
+  }
+});
+
+
+app.get("/admin/users", authenticate, async (req, res) => {
+  try {
+    const userRole = Array.isArray(req.user.role) ? req.user.role[0] : req.user.role;
+    if (userRole !== "admin") {
+      return res.status(403).json({ message: "Доступ запрещён" });
+    }
+
+    const users = await User.find().select('name surname lastname email eventId');
+
+    const usersWithInfo = users.map(user => ({
+      id: user._id.toString(), 
+      fullName: [user.surname, user.name, user.lastname].filter(Boolean).join(' '),
+      email: user.email,
+      eventCount: Array.isArray(user.eventId) ? user.eventId.length : 0,
+      eventIds: Array.isArray(user.eventId)
+        ? user.eventId.map(id => id.toString())
+        : []
+    }));
+
+    res.json(usersWithInfo);
+  } catch (error) {
+    console.error("GET /admin/users error:", error);
+    res.status(500).json({ message: "Ошибка загрузки пользователей" });
   }
 });
 
