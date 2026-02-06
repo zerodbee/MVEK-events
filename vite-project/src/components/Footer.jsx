@@ -5,12 +5,28 @@ function Footer() {
     <footer className="footer-container">
       <div className="footer-content">
         <span className="footer-accent"></span>
-        <h3 className="footer-title">Дипломная работа</h3>
-        <div className="footer-subtitle">Выпуск 2026</div>
-        <p className="footer-text"><strong>Оборотова Виктория Сергеевна</strong></p>
-        <p className="footer-text">Студент, группа ЭдИС-215/21</p>
+        <h3 className="footer-title">Онлайн-афиша МВЕК</h3>
+        <div className="footer-subtitle">События, мероприятия и расписание колледжа</div>
+
         <p className="footer-text">
-          <span className="footer-year">09.02.07</span> Информационные системы и программирование
+          <strong>Международный восточно-европейский колледж</strong><br />
+          Входит в первую лигу колледжей России
+        </p>
+        <p className="footer-text">
+          Адрес (головной офис): 426008, г. Ижевск, ул. Пушкинская, д. 268, лит. Ж [[1]][[7]]
+        </p>
+        <p className="footer-text">Телефон: <a href="tel:88001007724" className="footer-link">8 (800) 100-77-24</a> (бесплатно по РФ) [[1]]</p>
+        <p className="footer-text">
+          Email: <a href="mailto:pk@mveu.ru" className="footer-link">distspo@mveu.ru</a> [[1]][[9]]
+        </p>
+        <p className="footer-text">
+          Официальный сайт:{" "}
+          <a href="https://mveu.ru/education/srednee_professionalnoe_obrazovanie/" target="_blank" rel="noopener noreferrer" className="footer-link">
+            mveu.ru
+          </a> [[4]]
+        </p>
+        <p className="footer-text">
+          <span className="footer-year">© {new Date().getFullYear()}</span> Все права защищены.
         </p>
       </div>
     </footer>

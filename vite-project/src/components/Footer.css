@@ -45,6 +45,24 @@
   color: #0f172a;
 }
 
+.footer-link {
+  color: #1e2589;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #000000;
+  text-decoration: underline;
+}
+
+.footer-link:focus {
+  outline: 2px solid #3b42c4;
+  outline-offset: 2px;
+}
+
+
 @media (max-width: 768px) {
   .footer-container {
     padding: 1.6rem 1.2rem;
@@ -77,5 +95,9 @@
     width: 40px;
     height: 2.5px;
     margin-bottom: 1rem;
+  }
+
+  .footer-link {
+    font-weight: 600;
   }
 }
