@@ -12,6 +12,7 @@ function Footer() {
           <strong>Международный восточно-европейский колледж</strong><br />
           Входит в первую лигу колледжей России
         </p>
+        <br></br>
         <p className="footer-text">
           Адрес (головной офис): г. Ижевск, ул. Пушкинская, д. 268
         </p>
@@ -23,8 +24,9 @@ function Footer() {
           Официальный сайт:{" "}
           <a href="https://mveu.ru/education/srednee_professionalnoe_obrazovanie/" target="_blank" rel="noopener noreferrer" className="footer-link">
             mveu.ru
-          </a> [[4]]
+          </a>
         </p>
+        <br></br>
         <p className="footer-text">
           <span className="footer-year">© {new Date().getFullYear()}</span> Все права защищены.
         </p>
