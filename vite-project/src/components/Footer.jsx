@@ -13,11 +13,11 @@ function Footer() {
           Входит в первую лигу колледжей России
         </p>
         <p className="footer-text">
-          Адрес (головной офис): 426008, г. Ижевск, ул. Пушкинская, д. 268, лит. Ж [[1]][[7]]
+          Адрес (головной офис): г. Ижевск, ул. Пушкинская, д. 268
         </p>
-        <p className="footer-text">Телефон: <a href="tel:88001007724" className="footer-link">8 (800) 100-77-24</a> (бесплатно по РФ) [[1]]</p>
+        <p className="footer-text">Телефон: <a href="tel:88001007724" className="footer-link">8(3412)77-68-17</a> (бесплатно по РФ) </p>
         <p className="footer-text">
-          Email: <a href="mailto:pk@mveu.ru" className="footer-link">distspo@mveu.ru</a> [[1]][[9]]
+          Email: <a href="mailto:pk@mveu.ru" className="footer-link">distspo@mveu.ru</a> 
         </p>
         <p className="footer-text">
           Официальный сайт:{" "}
